@@ -44,3 +44,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+##====Comment creer une application avec typescripte ==
+## ceate react app with typscripte
+npx create-react-app my-app --template typescript
+
+## ===== installer "mudey-react-cli" pour creéer les composant et pages
+npm install -g mudey-react-cli
+## ====== install "mudey-create-model generate" pour créer les model ========
+npm i mudey-create-model
+## ======== install react-bootstrap pour utiliser les fenetrse modales
+npm i react-bootstrap
