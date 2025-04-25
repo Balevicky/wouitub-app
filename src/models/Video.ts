@@ -6,7 +6,7 @@ export interface Video {
   poster: File | null | string;
   link: File | null | string;
   author?: string;
-  isAvailabble: boolean;
+  isAvailable: boolean;
   category: string;
   creatdate_at?: Date;
   update_at?: Date;
