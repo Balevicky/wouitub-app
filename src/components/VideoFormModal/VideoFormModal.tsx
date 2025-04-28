@@ -6,9 +6,9 @@ import React, { FC, useEffect, useState } from "react";
 import "./VideoFormModal.css";
 import { Button, Modal } from "react-bootstrap";
 import { Video } from "../../models/Video";
-import { category } from "../../models/category";
-import { title } from "process";
-import { convertFileToLink } from "../../helpers/fileHelper";
+import { convertFileToBlob, convertFileToLink } from "../../helpers/fileHelper";
+import { addVideo } from "../../api/api-video";
+import Loading from "../Loading/Loading";
 
 interface VideoFormModalProps {
   hideModal: () => void;
@@ -17,6 +17,7 @@ interface VideoFormModalProps {
 const VideoFormModal: FC<VideoFormModalProps> = ({ hideModal }) => {
   const [posterPreviw, setPosterPreviw] = useState<string>("");
   const [videoPreviw, setVideoPreviw] = useState<string>("");
+  const [formSubmitError, setFormSubmitError] = useState<string>("");
   const [formData, setFormData] = useState<Video>({
     title: "",
     description: "",
@@ -88,14 +89,34 @@ const VideoFormModal: FC<VideoFormModalProps> = ({ hideModal }) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+    // <Loading />;
     if (!validateForm()) {
       return;
     }
-    const video: Video = formData;
-    video.creatdate_at = new Date();
-    console.log(video);
+    try {
+      const video: Video = formData;
+      video.creatdate_at = new Date();
+      video.poster = await convertFileToBlob(video.poster as File);
+      video.link = await convertFileToBlob(video.link as File);
+      const result = await addVideo(video);
+
+      if (result.isSucces) {
+        setFormData({
+          title: "",
+          description: "",
+          poster: null,
+          link: null,
+          category: "",
+          isAvailable: true,
+        });
+        hideModal();
+        // console.log(result);
+      }
+    } catch (error) {
+      setFormSubmitError("Error: please try again later !");
+    }
   };
 
   return (
@@ -107,6 +128,9 @@ const VideoFormModal: FC<VideoFormModalProps> = ({ hideModal }) => {
         </Modal.Header>
         <Modal.Body>
           <form action="">
+            {formSubmitError && (
+              <div className="text-danger">{formSubmitError}</div>
+            )}
             <div className="form-group pt-1">
               <label htmlFor="title" className="form-label">
                 Title :

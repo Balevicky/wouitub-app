@@ -5,27 +5,37 @@ import React, { FC, useEffect, useState } from "react";
 import "./Container.css";
 import { title } from "process";
 import VideoFormModal from "../VideoFormModal/VideoFormModal";
+import { Video } from "../../models/Video";
+import { getAllVideo } from "../../api/api-video";
+import { convertBlobToUrl } from "../../helpers/fileHelper";
 
 interface ContainerProps {}
 
 const Container: FC<ContainerProps> = () => {
-  // {
-  //   title,
-  //     descrption,
-  //     poster,
-  //     link,
-  //     author,
-  //     isavailable,
-  //     createdate_at,
-  //     update_at,
-  // }
-  const [displayModal, setDisplayModal] = useState<boolean>(true);
+  const [displayModal, setDisplayModal] = useState<boolean>(false);
+  const [videos, setVideos] = useState<Video[]>([]);
+
+  const runLocalData = async () => {
+    const data: any = await getAllVideo();
+    console.log(data);
+
+    if (data.isSucces) {
+      data.results.map((video: Video) => {
+        console.log(video);
+
+        video.poster = convertBlobToUrl(video.poster as Blob);
+        video.link = convertBlobToUrl(video.link as Blob);
+        return video;
+      });
+      setVideos(data.results);
+      // console.log(videos);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const runLocalData = async () => {};
     runLocalData();
-  });
+  }, [videos]);
 
   return (
     <div className="container py-2">
@@ -49,18 +59,27 @@ const Container: FC<ContainerProps> = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Formation react</td>
-              <td>
-                <img src="assets/images/5569190_7d1c.jpg" alt="" width={80} />
-              </td>
-              <td>
-                <button className="btn btn-success m-1">View</button>
-                <button className="btn btn-primary m-1">Edit</button>
-                <button className="btn btn-danger m-1">Delete</button>
-              </td>
-            </tr>
+            {videos.map((video, index) => {
+              return (
+                <tr key={video._id}>
+                  <th scope="row">{index + 1}</th>
+                  <td>{video.title}</td>
+                  <td>
+                    <img
+                      src={video.poster as string}
+                      alt={video.title}
+                      width={80}
+                      height={80}
+                    />
+                  </td>
+                  <td>
+                    <button className="btn btn-success m-1">View</button>
+                    <button className="btn btn-primary m-1">Edit</button>
+                    <button className="btn btn-danger m-1">Delete</button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

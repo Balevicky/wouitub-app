@@ -54,3 +54,5 @@ npm install -g mudey-react-cli
 npm i mudey-create-model
 ## ======== install react-bootstrap pour utiliser les fenetrse modales
 npm i react-bootstrap
+##==============  installer esperodb pour le stockage local dans le navigateur
+npm i esperodb
