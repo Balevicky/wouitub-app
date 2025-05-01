@@ -56,3 +56,5 @@ npm i mudey-create-model
 npm i react-bootstrap
 ##==============  installer esperodb pour le stockage local dans le navigateur
 npm i esperodb
+## ============= install ouitube-player pour jouer munisique et vide
+npm i ouitube-player

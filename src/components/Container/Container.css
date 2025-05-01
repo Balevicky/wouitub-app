@@ -8,3 +8,7 @@
 .container {
   align-items: start;
 }
+.tableHeader {
+  background: rgb(5, 68, 204);
+  color: white;
+}

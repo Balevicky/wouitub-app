@@ -6,7 +6,7 @@ export const addVideo = async (video: Video) => {
   try {
     await db.addData("video", video);
     return {
-      isSucces: true,
+      isSuccess: true,
       message: "video added successfuly!",
     };
   } catch (error) {
@@ -22,7 +22,7 @@ export const updateVideo = async (video: Video) => {
   try {
     await db.updateData("video", video);
     return {
-      isSucces: true,
+      isSuccess: true,
       message: "video updated successfuly!",
     };
   } catch (error) {
@@ -38,7 +38,8 @@ export const getVideo = async (_id: number) => {
   try {
     const video = await db.getData("video", _id);
     return {
-      isSucces: true,
+      isSuccess: true,
+
       result: video,
       //   message: "video added successfuly!",
     };
@@ -55,7 +56,7 @@ export const getAllVideo = async () => {
   try {
     const videos = await db.getAllData("video");
     return {
-      isSucces: true,
+      isSuccess: true,
       results: videos,
       //   message: "video gotten successfuly!",
     };
@@ -72,7 +73,7 @@ export const deleteVideo = async (_id: number) => {
   try {
     const videos = await db.deleteData("video", _id);
     return {
-      isSucces: true,
+      isSuccess: true,
       results: videos,
       message: "video deleted successfuly!",
     };
