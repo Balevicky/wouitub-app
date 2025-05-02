@@ -6,14 +6,14 @@
 */
 import React, { FC, useEffect, Fragment, useState } from "react";
 // import Loading from '../Loading/Loading';
-import "./Acount.css";
+import "./Account.css";
 import Loading from "../../components/Loading/Loading";
 
 import Container from "../../components/Container/Container";
 
-interface AcountProps {}
+interface AccountProps {}
 
-const Acount: FC<AcountProps> = () => {
+const Account: FC<AccountProps> = () => {
   // const [state, setState] = useState<any>(null)
   const [loading, setLoading] = useState(true);
   // const [value, setValue] = useState("");
@@ -31,7 +31,7 @@ const Acount: FC<AcountProps> = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="Acount">
+        <div className="Account">
           {/* Acount Component */}
 
           <Container />
@@ -42,4 +42,4 @@ const Acount: FC<AcountProps> = () => {
   );
 };
 
-export default Acount;
+export default Account;

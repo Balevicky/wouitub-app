@@ -5,18 +5,19 @@ import "./App.css";
 // import Footer from "./components/Footer/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import Acount from "./pages/Acount/Acount";
+import Account from "./pages/Account/Account";
 import Header from "./components/Header/Header";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 function App() {
   return (
     <div className="App">
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/acount" element={<Acount />} />
-          <Route path="/*" element={<Home />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>
