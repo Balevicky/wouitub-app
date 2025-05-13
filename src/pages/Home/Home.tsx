@@ -11,13 +11,13 @@ import Loading from "../../components/Loading/Loading";
 import { convertBlobToUrl } from "../../helpers/fileHelper";
 import { getAllVideo } from "../../api/api-video";
 import { Video } from "../../models/Video";
+import VideoCard from "../../components/VideoCard/VideoCard";
 
 interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
-  // const [state, setState] = useState<any>(null)
   const [loading, setLoading] = useState(true);
-  // const [value, setValue] = useState("");
+
   const [videos, setVideos] = useState<Video[]>([]);
   const runLocalData = async () => {
     const data: any = await getAllVideo();
@@ -51,23 +51,7 @@ const Home: FC<HomeProps> = () => {
         <div className="Home container">
           <div className="row">
             {videos.map((video: Video) => (
-              <div className="col-lg-3 col-md-6" key={video._id}>
-                <div className="card my-1">
-                  <img
-                    src={video.posterLink as string}
-                    className="card-img-top"
-                    alt={video.title}
-                    height="200px"
-                    width="15%"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{video.title} </h5>
-                    <p className="card-text">
-                      created at: {video?.creatdate_at?.toDateString()}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <VideoCard video={video} key={video._id} />
             ))}
           </div>
         </div>
