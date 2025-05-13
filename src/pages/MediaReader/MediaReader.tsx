@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 import { getVideo } from "../../api/api-video";
 import { OuitubePlayer } from "ouitube-player";
 import { convertBlobToUrl } from "../../helpers/fileHelper";
-import { log } from "node:console";
+import PlayList from "../../components/PlayList/PlayList";
 
 interface MediaReaderProps {}
 
@@ -22,7 +22,7 @@ const MediaReader: FC<MediaReaderProps> = () => {
   const [loading, setLoading] = useState(true);
   const [idvideo, setidvideo] = useState<number>(0);
   const [video, setVideo] = useState<Video | undefined>();
-  const { videoId } = useParams();
+  const { videoId }: any = useParams();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,7 +47,7 @@ const MediaReader: FC<MediaReaderProps> = () => {
       setLoading(false);
     };
     runLocalData();
-  }, []);
+  }, [videoId]);
 
   return (
     <div className="container-fluid">
@@ -59,8 +59,12 @@ const MediaReader: FC<MediaReaderProps> = () => {
             <div className="col-md-9 card">
               <OuitubePlayer src={video.videolLink as string} />
               <h2>{video.title}</h2>
+              <div className="video-description p-2">{video.description}</div>
             </div>
-            <div className="col-md-3 card"></div>
+
+            <div className="col-md-3 card">
+              <PlayList videoId={videoId} />
+            </div>
           </div>
         </div>
       ) : null}
