@@ -18,7 +18,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/reader/:videoId" element={<MediaReader />} />
+          <Route path="/reader/:slug" element={<MediaReader />} />
+          {/* <Route path="/reader/:videoId" element={<MediaReader />} /> */}
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

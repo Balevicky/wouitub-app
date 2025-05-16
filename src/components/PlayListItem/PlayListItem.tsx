@@ -14,16 +14,17 @@ import { Link } from "react-router-dom";
 interface PlayListItemProps {
   video: Video;
   currentVideoId: number;
+  // currentVideoSlug: string;
 }
 
 const PlayListItem: FC<PlayListItemProps> = ({ video, currentVideoId }) => {
   // const [state, setState] = useState<any>(null)
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   return (
     <div className="PlayListItem p-1">
       <Link
-        to={"/reader/" + video._id}
+        to={"/reader/" + video.slug}
         className={
           currentVideoId == video._id ? "row border current" : "row border"
         }

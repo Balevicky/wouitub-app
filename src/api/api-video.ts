@@ -1,9 +1,11 @@
+import { slugyfy } from "../helpers/stringHelpers";
 import { Video } from "../models/Video";
 import { db } from "./database";
 
 // =========== Ajout video
 export const addVideo = async (video: Video) => {
   try {
+    video.slug = slugyfy(video.title);
     await db.addData("video", video);
     return {
       isSuccess: true,
@@ -20,6 +22,7 @@ export const addVideo = async (video: Video) => {
 // =========== mise à jour video
 export const updateVideo = async (video: Video) => {
   try {
+    video.slug = slugyfy(video.title);
     await db.updateData("video", video);
     return {
       isSuccess: true,
@@ -41,6 +44,24 @@ export const getVideo = async (_id: number) => {
       isSuccess: true,
 
       result: video,
+      //   message: "video added successfuly!",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      isSuccess: true,
+      error,
+    };
+  }
+};
+// =========== recupperer une  video
+export const searchVideoBySlug = async (slug: string) => {
+  try {
+    const video = await db.search("video", "slug", slug);
+    return {
+      isSuccess: true,
+
+      result: video[0],
       //   message: "video added successfuly!",
     };
   } catch (error) {

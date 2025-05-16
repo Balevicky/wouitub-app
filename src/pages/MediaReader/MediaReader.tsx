@@ -9,8 +9,8 @@ import React, { FC, useEffect, Fragment, useState } from "react";
 import "./MediaReader.css";
 import Loading from "../../components/Loading/Loading";
 import { Video } from "../../models/Video";
-import { useParams } from "react-router-dom";
-import { getVideo } from "../../api/api-video";
+import { useNavigate, useParams } from "react-router-dom";
+import { searchVideoBySlug } from "../../api/api-video";
 import { OuitubePlayer } from "ouitube-player";
 import { convertBlobToUrl } from "../../helpers/fileHelper";
 import PlayList from "../../components/PlayList/PlayList";
@@ -18,36 +18,47 @@ import PlayList from "../../components/PlayList/PlayList";
 interface MediaReaderProps {}
 
 const MediaReader: FC<MediaReaderProps> = () => {
-  // const [state, setState] = useState<any>(null)
   const [loading, setLoading] = useState(true);
-  const [idvideo, setidvideo] = useState<number>(0);
+  const [errorPage, setErrorPage] = useState(false);
   const [video, setVideo] = useState<Video | undefined>();
-  const { videoId }: any = useParams();
+  const { slug } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const runLocalData = async () => {
-      if (videoId) {
-        let id = parseInt(videoId);
-        const data: any = await getVideo(id);
+      if (slug) {
+        // let id = parseInt(videoId);
+        try {
+          const data: any = await searchVideoBySlug(slug);
+          if (data.isSuccess) {
+            const currentVideo = data.result;
 
-        if (data.isSuccess) {
-          const currentVideo = data.result;
-
-          currentVideo.posterLink = convertBlobToUrl(
-            currentVideo.poster as Blob
-          );
-          currentVideo.videolLink = convertBlobToUrl(currentVideo.link as Blob);
-          setVideo(currentVideo);
-          setidvideo(id);
-          console.log(video);
-          console.log(video?.link);
+            currentVideo.posterLink = convertBlobToUrl(
+              currentVideo.poster as Blob
+            );
+            currentVideo.videolLink = convertBlobToUrl(
+              currentVideo.link as Blob
+            );
+            setVideo(currentVideo);
+            // setidvideo(id);
+            console.log(video);
+            console.log(video?.link);
+          } else {
+            setErrorPage(true);
+          }
+        } catch (error) {
+          setErrorPage(true);
         }
       }
       setLoading(false);
     };
     runLocalData();
-  }, [videoId]);
+  }, [slug]);
+
+  if (errorPage) {
+    navigate("/error");
+  }
 
   return (
     <div className="container-fluid">
@@ -63,7 +74,7 @@ const MediaReader: FC<MediaReaderProps> = () => {
             </div>
 
             <div className="col-md-3 card">
-              <PlayList videoId={videoId} />
+              <PlayList videoId={video._id!} />
             </div>
           </div>
         </div>

@@ -20,6 +20,8 @@ const PlayList: FC<PlayListProps> = ({ videoId }) => {
   const runLocalData = async () => {
     const data: any = await getAllVideo();
     if (data.isSuccess) {
+      console.log(data.results);
+
       data.results.map((video: Video) => {
         video.posterLink = convertBlobToUrl(video.poster as Blob);
         video.videolLink = convertBlobToUrl(video.link as Blob);
@@ -37,7 +39,7 @@ const PlayList: FC<PlayListProps> = ({ videoId }) => {
   return (
     <div className="PlayList">
       {videos.map((video: Video) => (
-        <PlayListItem currentVideoId={videoId} video={video} />
+        <PlayListItem currentVideoId={videoId} video={video} key={video._id} />
       ))}
     </div>
   );

@@ -4,7 +4,7 @@ const dataStructure: any = [
   {
     video: [
       {
-        indexes: [{ category: { unique: false } }],
+        indexes: [{ slug: { unique: true } }, { category: { unique: false } }],
         primaryKey: "_id",
       },
     ],

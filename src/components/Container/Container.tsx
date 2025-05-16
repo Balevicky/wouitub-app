@@ -10,6 +10,7 @@ import { getAllVideo } from "../../api/api-video";
 import { convertBlobToUrl } from "../../helpers/fileHelper";
 import ViewVideoModal from "../ViewVideoModal/ViewVideoModal";
 import DeleteVideoModal from "../DeleteVideoModal/DeleteVideoModal";
+import UploadModal from "../UploadModal/UploadModal";
 
 // import { NumberLiteralType } from "typescript";
 
@@ -19,7 +20,8 @@ const Container: FC<ContainerProps> = () => {
   const [displayModal, setDisplayModal] = useState<boolean>(false);
   const [viewModal, setViewModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
-  const [currentVideo, setCurrentVideol] = useState<Video|undefined>();
+  const [uploadModal, setUploadModal] = useState<boolean>(false);
+  const [currentVideo, setCurrentVideol] = useState<Video | undefined>();
   const [videos, setVideos] = useState<Video[]>([]);
 
   const runLocalData = async () => {
@@ -28,8 +30,9 @@ const Container: FC<ContainerProps> = () => {
 
     if (data.isSuccess) {
       data.results.map((video: Video) => {
-     video.posterLink=
-        video.posterLink = convertBlobToUrl(video.poster as Blob);
+        video.posterLink = video.posterLink = convertBlobToUrl(
+          video.poster as Blob
+        );
         video.videolLink = convertBlobToUrl(video.link as Blob);
         // video.poster = convertBlobToUrl(video.poster as Blob);
         // video.link = convertBlobToUrl(video.link as Blob);
@@ -45,18 +48,22 @@ const Container: FC<ContainerProps> = () => {
     runLocalData();
   }, []);
 
-  const handleView =(video: Video) => {
-    setCurrentVideol(video);  
-      setViewModal(true);
+  const handleView = (video: Video) => {
+    setCurrentVideol(video);
+    setViewModal(true);
   };
   // const handleEdit = (id: number) => {
   const handleEdit = (video: Video) => {
-    setCurrentVideol(video);  
+    setCurrentVideol(video);
     setDisplayModal(true);
   };
   const handleAdd = () => {
-    setCurrentVideol(undefined);  
+    setCurrentVideol(undefined);
     setDisplayModal(true);
+  };
+  const handleUpload = () => {
+    setCurrentVideol(undefined);
+    setUploadModal(true);
   };
   const handleDelete = (video: Video) => {
     setCurrentVideol(video);
@@ -65,18 +72,25 @@ const Container: FC<ContainerProps> = () => {
 
   return (
     <div className="container py-2">
-      <button
-        className="btn btn-primary "
-        // onClick={() => setDisplayModal(true)}
-        onClick={() => handleAdd()}
-      >
-        Add vidéo
-      </button>{" "}
+      <div className="d-flex gap-2 justify-content-between">
+        <button className="btn btn-primary " onClick={() => handleAdd()}>
+          Add vidéo
+        </button>
+        <button className="btn btn-danger " onClick={() => handleUpload()}>
+          Add Many
+        </button>
+      </div>
       <br />
       {displayModal && (
         <VideoFormModal
           currentVideo={currentVideo}
           hideModal={() => setDisplayModal(false)}
+          updateData={runLocalData}
+        />
+      )}
+      {uploadModal && (
+        <UploadModal
+          hideModal={() => setUploadModal(false)}
           updateData={runLocalData}
         />
       )}

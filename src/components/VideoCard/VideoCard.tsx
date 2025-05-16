@@ -17,7 +17,8 @@ const VideoCard: FC<VideoCardProps> = ({ video }) => {
   return (
     <div className=" VideoCard col-lg-3 col-md-6">
       {/* key={video._id} */}
-      <Link to={"/reader/" + video._id}>
+      {/* <Link to={"/reader/" + video._id}> */}
+      <Link to={"/reader/" + video.slug}>
         <div className="card my-1">
           <img
             src={video.posterLink as string}

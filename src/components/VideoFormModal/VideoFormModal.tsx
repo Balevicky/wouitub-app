@@ -9,6 +9,7 @@ import { Video } from "../../models/Video";
 import { convertFileToBlob, convertFileToLink } from "../../helpers/fileHelper";
 import { addVideo, updateVideo } from "../../api/api-video";
 import Loading from "../Loading/Loading";
+import { slugyfy } from "../../helpers/stringHelpers";
 // import Loading from "../Loading/Loading";
 
 interface VideoFormModalProps {
@@ -121,11 +122,14 @@ const VideoFormModal: FC<VideoFormModalProps> = ({
         if (video.link instanceof File) {
           video.link = await convertFileToBlob(video.link as File);
         }
+        // update video===============
         delete video?.posterLink;
         delete video?.videolLink;
         video.update_at = new Date();
+
         result = await updateVideo(video);
       } else {
+        // create video===============
         video.poster = await convertFileToBlob(video.poster as File);
         video.link = await convertFileToBlob(video.link as File);
         video.creatdate_at = new Date();
