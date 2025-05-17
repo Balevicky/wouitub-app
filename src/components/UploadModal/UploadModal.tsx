@@ -12,6 +12,9 @@ import { convertFileToBlob, linkToBlob } from "../../helpers/fileHelper";
 import { Video } from "../../models/Video";
 import { addVideo } from "../../api/api-video";
 import Loading from "../Loading/Loading";
+import { emitNotification } from "../../helpers/notificationHelpers";
+import { ADD } from "../../redux/type/actions";
+import { useDispatch } from "react-redux";
 
 interface UploadModalProps {
   hideModal: () => void;
@@ -20,7 +23,7 @@ interface UploadModalProps {
 
 const UploadModal: FC<UploadModalProps> = ({ hideModal, updateData }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
     const runLocalData = async () => {};
@@ -56,6 +59,13 @@ const UploadModal: FC<UploadModalProps> = ({ hideModal, updateData }) => {
 
       updateData();
       hideModal();
+      // Add all video notification
+      emitNotification(
+        dispatch,
+        "All video Added successfully !",
+        ADD,
+        "success"
+      );
     } catch (error) {
       console.error(
         "Une erreur s'est produite lors du traitement des fichiers :",

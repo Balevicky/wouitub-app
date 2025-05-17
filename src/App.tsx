@@ -9,6 +9,7 @@ import Account from "./pages/Account/Account";
 import Header from "./components/Header/Header";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import MediaReader from "./pages/MediaReader/MediaReader";
+import NotificationComponent from "./components/NotificationComponent/NotificationComponent";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           {/* <Route path="/reader/:videoId" element={<MediaReader />} /> */}
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
+        <NotificationComponent />
       </BrowserRouter>
     </div>
   );

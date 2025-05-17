@@ -10,6 +10,9 @@ import { convertFileToBlob, convertFileToLink } from "../../helpers/fileHelper";
 import { addVideo, updateVideo } from "../../api/api-video";
 import Loading from "../Loading/Loading";
 import { slugyfy } from "../../helpers/stringHelpers";
+import { useDispatch } from "react-redux";
+import { emitNotification } from "../../helpers/notificationHelpers";
+import { ADD } from "../../redux/type/actions";
 // import Loading from "../Loading/Loading";
 
 interface VideoFormModalProps {
@@ -31,6 +34,8 @@ const VideoFormModal: FC<VideoFormModalProps> = ({
   );
   const [isSubmited, setIsSubmited] = useState<boolean>(false);
   const [formSubmitError, setFormSubmitError] = useState<string>("");
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState<Video>(
     currentVideo || {
       title: "",
@@ -48,6 +53,7 @@ const VideoFormModal: FC<VideoFormModalProps> = ({
     const runLocalData = async () => {};
     runLocalData();
   }, []);
+
   // ======= Recuperer les données saisie
   const handleInputChange = async (e: any) => {
     const { name, value, type, files, checked } = e.target;
@@ -147,10 +153,23 @@ const VideoFormModal: FC<VideoFormModalProps> = ({
         });
         updateData();
         hideModal();
+        if (currentVideo) {
+          // Update video
+          emitNotification(dispatch, "Video Updated  successfully !", ADD);
+        } else {
+          // Add video
+          emitNotification(dispatch, "Video Added successfully !", ADD);
+        }
         // console.log(result);
       }
     } catch (error) {
       setFormSubmitError("Error: please try again later !");
+      emitNotification(
+        dispatch,
+        "Error: please try again later !",
+        ADD,
+        "danger"
+      );
     }
     setIsSubmited(false);
   };

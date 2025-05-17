@@ -8,14 +8,19 @@ import React, { FC, useEffect } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 
+
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
+ 
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const runLocalData = async () => {};
     runLocalData();
   });
+
+  const handleNotif = () => {};
 
   return (
     <div className="Header">
@@ -50,6 +55,14 @@ const Header: FC<HeaderProps> = () => {
               </button>
             </form>
           </div>
+
+          <button
+            // onClick={handleNotif}
+            className="btn btn-outline-success"
+            type="submit"
+          >
+            Add notif
+          </button>
 
           {/* =========== */}
         </div>

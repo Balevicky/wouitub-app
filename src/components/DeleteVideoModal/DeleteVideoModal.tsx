@@ -9,6 +9,9 @@ import "./DeleteVideoModal.css";
 import { Button, Modal } from "react-bootstrap";
 import { deleteVideo } from "../../api/api-video";
 import { Video } from "../../models/Video";
+import { emitNotification } from "../../helpers/notificationHelpers";
+import { useDispatch } from "react-redux";
+import { ADD } from "../../redux/type/actions";
 
 interface DeleteVideoModalProps {
   hideModal: () => void;
@@ -22,6 +25,7 @@ const DeleteVideoModal: FC<DeleteVideoModalProps> = ({
   updateData,
   hideModal,
 }) => {
+  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
     const runLocalData = async () => {};
@@ -32,6 +36,8 @@ const DeleteVideoModal: FC<DeleteVideoModalProps> = ({
     await deleteVideo(currentVideo._id!);
     updateData();
     hideModal();
+    // Add video
+    emitNotification(dispatch, "Video deleted successfully !", ADD, "success");
   };
 
   return (

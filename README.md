@@ -56,5 +56,10 @@ npm i mudey-create-model
 npm i react-bootstrap
 ##==============  installer esperodb pour le stockage local dans le navigateur
 npm i esperodb
-## ============= install ouitube-player pour jouer munisique et vide
+## ============= install ouitube-player pour jouer musique et video
 npm i ouitube-player
+## ============= install  redux react-redux 
+ npm i redux react-redux 
+ ## ============== install Redux DevTools sur le navigateur
+ ## ============== install Redux-devTools-extention 
+ npm install --save redux-devtools-extension -f
