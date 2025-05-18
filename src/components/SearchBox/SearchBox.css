@@ -2,12 +2,13 @@
   Authors : Mudey Formation
   Website : https://mudey.fr/
   App Name : E-commerce with React.Js
-  Created At : 01/05/2025 12:09:57
+  Created At : 18/05/2025 15:14:58
 */
 
-/* .Home .homeHeader h2{
+.SearchBox .homeHeader h2 {
   color: red;
 }
-.Home .homeHeader p{
-  font-size: 1.5rem;
-} */
+
+.SearchBox .homeHeader p {
+  font-size: 1.3rem;
+}

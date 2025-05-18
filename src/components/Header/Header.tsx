@@ -4,23 +4,35 @@
   App Name : E-commerce with React.Js
   Created At : 24/04/2025 09:11:59
 */
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
- 
+  const navigate = useNavigate();
+  const currentSearchParams = new URLSearchParams(window.location.search);
+  const searchQuery = currentSearchParams.get("searchVideo") || "";
+  const [searchInput, setSearchInput] = useState<string>(searchQuery);
+  console.log(searchQuery);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const runLocalData = async () => {};
+    const runLocalData = async () => {
+      setSearchInput(searchQuery);
+    };
     runLocalData();
-  });
+  }, []);
 
-  const handleNotif = () => {};
+  // const handleNotif = () => {};
+
+  const handleSearchSubmit = (e: any) => {
+    e.preventDefault();
+    const currentSearchParams = new URLSearchParams(window.location.search);
+    currentSearchParams.set("searchVideo", searchInput);
+    navigate({ search: currentSearchParams.toString() });
+  };
 
   return (
     <div className="Header">
@@ -43,8 +55,14 @@ const Header: FC<HeaderProps> = () => {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex">
+            <form
+              className="d-flex"
+              role="search"
+              onSubmit={handleSearchSubmit}
+            >
               <input
+                onChange={(e) => setSearchInput(e.target.value)}
+                defaultValue={searchInput}
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
@@ -56,13 +74,13 @@ const Header: FC<HeaderProps> = () => {
             </form>
           </div>
 
-          <button
+          {/* <button
             // onClick={handleNotif}
             className="btn btn-outline-success"
             type="submit"
           >
             Add notif
-          </button>
+          </button> */}
 
           {/* =========== */}
         </div>

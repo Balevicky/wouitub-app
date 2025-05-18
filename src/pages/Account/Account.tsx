@@ -10,6 +10,7 @@ import "./Account.css";
 import Loading from "../../components/Loading/Loading";
 
 import Container from "../../components/Container/Container";
+import { useLocation } from "react-router-dom";
 
 interface AccountProps {}
 

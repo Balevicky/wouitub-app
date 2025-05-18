@@ -11,6 +11,7 @@ import { convertBlobToUrl } from "../../helpers/fileHelper";
 import ViewVideoModal from "../ViewVideoModal/ViewVideoModal";
 import DeleteVideoModal from "../DeleteVideoModal/DeleteVideoModal";
 import UploadModal from "../UploadModal/UploadModal";
+import SearchBox from "../SearchBox/SearchBox";
 
 // import { NumberLiteralType } from "typescript";
 
@@ -38,6 +39,7 @@ const Container: FC<ContainerProps> = () => {
         // video.link = convertBlobToUrl(video.link as Blob);
         return video;
       });
+
       setVideos(data.results);
       // console.log(videos);
     }
@@ -45,7 +47,7 @@ const Container: FC<ContainerProps> = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    runLocalData();
+    // runLocalData();
   }, []);
 
   const handleView = (video: Video) => {
@@ -71,7 +73,8 @@ const Container: FC<ContainerProps> = () => {
   };
 
   return (
-    <div className="container py-2">
+    <div className="container-fluid py-2 px-4">
+      <SearchBox handleChange={setVideos} />
       <div className="d-flex gap-2 justify-content-between">
         <button className="btn btn-primary " onClick={() => handleAdd()}>
           Add vidéo
@@ -112,9 +115,14 @@ const Container: FC<ContainerProps> = () => {
           <strong>Aucune video en ligne </strong>
         </h2>
       ) : (
-        <div className="video-list py-2">
-          <table className="table table-bordered border-primary ">
-            <thead>
+        <div className="video-list py-2 ">
+          <table className="table table-bordered border-primary table-striped caption-top">
+            <caption>
+              <h2>
+                <strong>List of video</strong>
+              </h2>
+            </caption>
+            <thead className="table-primary ">
               <tr>
                 <th scope="col">N°</th>
                 <th scope="col">Title</th>

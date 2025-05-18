@@ -8,39 +8,21 @@ import React, { FC, useEffect, Fragment, useState } from "react";
 // import Loading from '../Loading/Loading';
 import "./Home.css";
 import Loading from "../../components/Loading/Loading";
-import { convertBlobToUrl } from "../../helpers/fileHelper";
-import { getAllVideo } from "../../api/api-video";
 import { Video } from "../../models/Video";
 import VideoCard from "../../components/VideoCard/VideoCard";
+import SearchBox from "../../components/SearchBox/SearchBox";
 
 interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
   const [loading, setLoading] = useState(true);
-
   const [videos, setVideos] = useState<Video[]>([]);
-  const runLocalData = async () => {
-    const data: any = await getAllVideo();
-    console.log(data);
 
-    if (data.isSuccess) {
-      data.results.map((video: Video) => {
-        video.posterLink = video.posterLink = convertBlobToUrl(
-          video.poster as Blob
-        );
-        video.videolLink = convertBlobToUrl(video.link as Blob);
-        return video;
-      });
-      setVideos(data.results);
-      setLoading(false);
-      // console.log(videos);
-    }
-  };
   // =============
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    runLocalData();
+    setLoading(false);
+    // runLocalData();
   }, []);
 
   return (
@@ -48,7 +30,8 @@ const Home: FC<HomeProps> = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="Home container">
+        <div className="Home container-fluid py-2">
+          <SearchBox handleChange={setVideos} />
           <div className="row">
             {videos.map((video: Video) => (
               <VideoCard video={video} key={video._id} />

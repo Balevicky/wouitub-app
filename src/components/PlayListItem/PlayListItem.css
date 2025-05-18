@@ -6,11 +6,17 @@
 */
 
 .PlayListItem:hover .border {
-  background-color: gainsboro;
-  color: white;
+  /* background-color: gainsboro;
+  color: white; */
+  /* =================== */
+  background-color: green ;
+  /* background-color: var(--bg-primary); */
+  color: white !important;
 }
 .PlayListItem .current {
-  background-color: rgba(109, 164, 174, 0.423) !important;
-  /* color: white !important; */
-  color: black !important;
+  background-color: rgba(18, 44, 241, 0.423) !important;
+  color: white !important; 
+  /* color: black !important; */
+  /* ==================== */
+
 }

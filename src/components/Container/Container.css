@@ -5,10 +5,6 @@
   Created At : 24/04/2025 09:20:31
 */
 
-.container {
-  align-items: start;
-}
-.tableHeader {
-  background: rgb(5, 68, 204);
-  color: white;
-}
+/* .container {
+  align-items: center !important;
+} */
