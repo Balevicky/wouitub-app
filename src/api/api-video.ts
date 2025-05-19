@@ -2,6 +2,7 @@ import { slugyfy } from "../helpers/stringHelpers";
 import { Video } from "../models/Video";
 import { db } from "./database";
 
+
 // =========== Ajout video
 export const addVideo = async (video: Video) => {
   try {
@@ -85,6 +86,36 @@ export const getAllVideo = async () => {
     console.log(error);
     return {
       isSuccess: true,
+      error,
+    };
+  }
+};
+// =========== recupperer  les  videos par page
+export const getVideoByPage = async (page = 1, pageSize = 10) => {
+  try {
+    return await db.getDataWithPagination("video", page, pageSize);
+    // const videos = await db.getDataWithPagination("video",page,pageSize);
+    // return {
+    //   isSuccess: true,
+    //   results: videos,
+    //   //   message: "video gotten successfuly!",
+  } catch (error) {
+    console.log(error);
+    return {
+      isSuccess: false,
+      error,
+    };
+  }
+};
+// ===========Rechercher les video
+export const findVideo = async (keyword:string,field="title",page = 1, pageSize = 10) => {
+  try {
+    return await db.searchByTag("video",field,keyword, page, pageSize);
+  
+  } catch (error) {
+    console.log(error);
+    return {
+      isSuccess: false,
       error,
     };
   }
