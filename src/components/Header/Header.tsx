@@ -39,8 +39,13 @@ const Header: FC<HeaderProps> = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-lg">
         {/* <nav className="navbar navbar-light bg-light shadow-lg"> */}
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
-            <strong>Wouitub</strong>
+          <Link to="/" className="d-flex gap-2 align-items-center">
+            <div className="logo">
+              <img src="/logo192.png" width={30} alt="logo192" />
+            </div>
+            <span className="navbar-brand">
+              <strong>Wouitub</strong>
+            </span>
           </Link>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">

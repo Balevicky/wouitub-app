@@ -8,12 +8,15 @@ import React, { FC, useEffect } from "react";
 import "./VideoCard.css";
 import { Video } from "../../models/Video";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
 
 interface VideoCardProps {
   video: Video;
 }
 
 const VideoCard: FC<VideoCardProps> = ({ video }) => {
+  const createdAt = moment(video?.creatdate_at);
   return (
     <div className=" VideoCard col-lg-3 col-md-6">
       {/* key={video._id} */}
@@ -27,9 +30,11 @@ const VideoCard: FC<VideoCardProps> = ({ video }) => {
             height="200px"
           />
           <div className="card-body">
-            <h5 className="card-title">{video.title} </h5>
+            <h5 className="card-title">
+              {capitalizeFirstLetter(video.title.toLowerCase())}
+            </h5>
             <p className="card-text">
-              created at: {video?.creatdate_at?.toDateString()}
+              created at: <strong>{createdAt.format("DD/MM/YYYY")}</strong>
             </p>
           </div>
         </div>

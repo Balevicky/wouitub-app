@@ -5,5 +5,18 @@
   Created At : 24/04/2025 09:11:59
 */
 
-.Header {
+.Header .navbar-brand strong{
+  color: blue;
+  font-size: 1.7rem;
 }
+
+.Header .btn {
+  color: blue;
+  border:solid 1px blue !important ;
+}
+.Header .btn:hover {
+ 
+  border:solid 1px green !important ;
+ 
+}
+    

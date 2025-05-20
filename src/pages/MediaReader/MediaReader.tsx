@@ -14,6 +14,7 @@ import { searchVideoBySlug } from "../../api/api-video";
 import { OuitubePlayer } from "ouitube-player";
 import { convertBlobToUrl } from "../../helpers/fileHelper";
 import PlayList from "../../components/PlayList/PlayList";
+import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
 
 interface MediaReaderProps {}
 
@@ -69,8 +70,10 @@ const MediaReader: FC<MediaReaderProps> = () => {
           <div className="row">
             <div className="col-md-9 card">
               <OuitubePlayer src={video.videolLink as string} />
-              <h2>{video.title}</h2>
-              <div className="video-description p-2">{video.description}</div>
+              <h2>{capitalizeFirstLetter(video.title.toLowerCase())}</h2>
+              <div id="video-descriotion" className="video-description p-2 ">
+                {video.description}
+              </div>
             </div>
 
             <div className="col-md-3 card">

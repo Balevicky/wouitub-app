@@ -12,6 +12,7 @@ import ViewVideoModal from "../ViewVideoModal/ViewVideoModal";
 import DeleteVideoModal from "../DeleteVideoModal/DeleteVideoModal";
 import UploadModal from "../UploadModal/UploadModal";
 import SearchBox from "../SearchBox/SearchBox";
+import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
 
 // import { NumberLiteralType } from "typescript";
 
@@ -136,7 +137,9 @@ const Container: FC<ContainerProps> = () => {
                 return (
                   <tr key={video._id}>
                     <th scope="row">{index + 1}</th>
-                    <td>{video.title}</td>
+                    {/* <td>{video.title}</td> */}
+                    <td>{capitalizeFirstLetter(video.title.toLowerCase())}</td>
+
                     <td>
                       <img
                         src={video.posterLink as string}

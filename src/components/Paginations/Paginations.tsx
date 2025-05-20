@@ -78,7 +78,7 @@ const Paginations: FC<PaginationsProps> = ({
             onClick={(event) => handleClick(event, previousPage)}
           >
             <a className="page-link" href="#">
-              Previous
+              Prev
             </a>
           </li>
           {currentPage! > step + 1 && (

@@ -5,4 +5,10 @@
   Created At : 12/05/2025 20:45:20
 */
 
-.MediaReader {}
+.MediaReader h2{
+  color: blue !important;
+}
+.MediaReader #video-descriotion{
+  text-align: justify;
+  letter-spacing: 1.5px !important;
+}

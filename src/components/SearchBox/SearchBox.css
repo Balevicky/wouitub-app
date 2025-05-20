@@ -6,11 +6,12 @@
 */
 
 .SearchBox .homeHeader h2 {
-  color: red;
+  color: blue;
 }
 
 .SearchBox .homeHeader p {
   font-size: 1.3rem;
+  
 }
 /* #pageSize{ */
   /* width: 100px !important;

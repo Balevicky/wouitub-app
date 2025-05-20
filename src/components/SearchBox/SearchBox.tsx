@@ -11,19 +11,10 @@ import { Video } from "../../models/Video";
 import { convertBlobToUrl } from "../../helpers/fileHelper";
 import Paginations from "../Paginations/Paginations";
 import { findVideo, getVideoByPage } from "../../api/api-video";
+import { ResultData } from "../../models/ResultData";
 
 interface SearchBoxProps {
   handleChange: (videos: Video[]) => void;
-}
-interface resultData {
-  isSuccess: boolean;
-  results?: Record<string, any>[];
-  totalPages?: number;
-  currentPage?: number;
-  nextPage?: number | null;
-  previousPage?: number | null;
-  allCount?: number | null;
-  pageLinks?: string[];
 }
 
 const SearchBox: FC<SearchBoxProps> = ({ handleChange }) => {
@@ -31,7 +22,7 @@ const SearchBox: FC<SearchBoxProps> = ({ handleChange }) => {
   const currentSearchParams = new URLSearchParams(window.location.search);
   const searchQuery = currentSearchParams.get("searchVideo") || "";
   const pageQuery = parseInt(currentSearchParams.get("page") || "1");
-  const [datas, setDatas] = useState<resultData | null>(null);
+  const [datas, setDatas] = useState<ResultData | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(pageQuery);
   const [pageSize, setPageSize] = useState<number>(8);
   const location = useLocation();
@@ -57,11 +48,6 @@ const SearchBox: FC<SearchBoxProps> = ({ handleChange }) => {
         return video;
       });
 
-      // const filteredVideos = data.results.filter((video: Video) =>
-      //   video.title.toLowerCase().includes(searchQuery.toLowerCase())
-      // );
-      // setVideos(filteredVideos);
-      // handleChange(filteredVideos);
       handleChange(data.results);
       console.log(data.results);
     }

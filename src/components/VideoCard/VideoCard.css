@@ -27,6 +27,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  color: blue;
 }
 .VideoCard .card{
 border-radius: 20px;
@@ -34,3 +35,8 @@ border-radius: 20px;
 .VideoCard .card img{
 border-radius: 20px 20px 0 0;
 }
+/* .VideoCard  p{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+} */

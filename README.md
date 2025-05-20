@@ -63,3 +63,5 @@ npm i ouitube-player
  ## ============== install Redux DevTools sur le navigateur
  ## ============== install Redux-devTools-extention 
  npm install --save redux-devtools-extension -f
+## =============== install moment pour formater les date
+ npm install moment @types/moment -f

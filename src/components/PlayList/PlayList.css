@@ -4,5 +4,29 @@
   App Name : E-commerce with React.Js
   Created At : 13/05/2025 14:40:07
 */
+/* 
+.PlayList {} */
 
-.PlayList {}
+.PlayList strong{
+  text-align: center !important;
+  display: block;
+}
+.PlayList{
+  border: 2px solid blueviolet;
+}
+.PlayList .PlayListHeader{
+  background-color:blueviolet;
+}
+.PlayList .PlayListHeader a{
+  color: black !important;
+}
+
+.PlayList .PlayListHeader *{
+  color: white !important;
+}
+.PlayList .PlayListContent{
+  height: calc(100vh - 240px);
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
